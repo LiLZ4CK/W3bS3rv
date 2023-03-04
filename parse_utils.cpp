@@ -10,14 +10,14 @@ void parse_host(Lexer &lexer,t_config &config) {
 void parse_port(Lexer &lexer,t_config &config) {
 
     if(lexer.get_size_value() > 3 || lexer.get_size_value() == 0)
-        throw std::runtime_error("Error: port take three values");
+        throw std::runtime_error("Error: port take between one and three values");
     
     for(int i = 0; i < lexer.get_size_value(); i++)
     {
         if(!is_number(lexer.getvalue(i)) && lexer.getvalue(i) != "")
         {
             if(lexer.getvalue(i) == "")
-            throw std::runtime_error("Error: port take numbers");
+            throw std::runtime_error("Error: port take just numbers");
         }
         config.port.push_back(lexer.getvalue(i));
     }
@@ -65,8 +65,4 @@ void    parse_auto_index(Lexer &lexer,t_config &config) {
         config.autoindex = false;
     else
         throw std::runtime_error("Error: autoindex take on or off");
-}
-
-void    parse_location(Lexer &lexer,t_config &config) {
-    std::cout << "location" << std::endl;
 }

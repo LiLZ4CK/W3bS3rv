@@ -1,26 +1,28 @@
 #include"lexer.hpp"
+#include"parse.hpp"
 
 
-// bool isValidMethod(std::string const &str) {
-//   return (str == "GET" ||
-//           str == "POST" ||
-//           str == "HEAD" ||
-//           str == "PUT" ||
-//           str == "DELETE");
-// }
+bool isValidMethod(std::string const &str) {
+  return (str == "GET" ||
+          str == "POST" ||
+          str == "DELETE");
+}
 
-// bool isValidDirective(std::string const &str) {
-//   return (str == "listen" ||
-//           str == "server_name" ||
-//           str == "root" ||
-//           str == "auth" ||
-//           str == "error_page" ||
-//           str == "upload" ||
-//           str == "autoindex" ||
-//           str == "index" ||
-//           str == "cgi" ||
-//           str == "cgi_bin");
-// }
+bool isValidDirective(std::string const &str) {
+  return (str == "host" ||
+          str == "port" ||
+          str == "root" ||
+          str == "client_max_body_size" ||
+          str == "error_page" ||
+          str == "http_methods" ||
+          str == "http_redirect" ||
+          str == "file_upload_location" ||
+          str == "upload" ||
+          str == "autoindex" ||
+          str == "index" ||
+          str == "cgi" ||
+          str == "cgi_bin");
+}
 
 bool is_number(const std::string& s)
 {

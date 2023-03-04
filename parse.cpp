@@ -1,4 +1,4 @@
-#include"lexer.hpp"
+#include"parse.hpp"
 
 bool    is_type(std::string type) {
     std::string types[] = {"host", "port", "client_max_body_size", "index", "error_page", "root", "location", "autoindex"};
@@ -11,8 +11,6 @@ bool    is_type(std::string type) {
     }
     return false;
 }
-
-
 
 void init_config(std::list<t_config> &cfg) {
     t_config config;
@@ -36,19 +34,25 @@ std::list<t_config>    parse_config(std::string filename) {
     
     while (lexer.gettype() != "EOF"){
         lexer.get_token();
-        if(lexer.gettype() == "" ||lexer.gettype() == "server")
-        {
-            if(lexer.gettype() == "server")
-                init_config(config);
-            continue;
+        if(lexer.gettype() == "server"){
+            init_config(config);
+             continue;
         }
-        for(int i = 0 ; i < 8; i++)
+        for(int i = 0 ; i < 8 && lexer.brackets.size(); i++)
         {
             if(lexer.gettype() == types[i]){
                 foo[i](lexer, config.back());
+                break;
             }
         }
+        if(!isValidDirective(lexer.gettype()) && lexer.gettype() != "" && 
+            lexer.gettype() != "EOF")
+                throw std::runtime_error("Error: Directive is not valid");
     }
+    if(config.empty())
+        throw std::runtime_error("Error: no server block found");
+    if(lexer.brackets.size() != 0)
+        throw std::runtime_error("Error: brackets not closed");
     return config;
 }
 
