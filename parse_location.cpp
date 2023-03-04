@@ -26,7 +26,6 @@ void    parse_location(Lexer &lexer,t_config &config) {
 
 	init_location(config.locations);
 
-    std::cout << lexer.getvalue(0) << std::endl; 
     parse_path_location(lexer, config);
     while (lexer.brackets.size() == 2)
     {
@@ -41,6 +40,5 @@ void    parse_location(Lexer &lexer,t_config &config) {
             lexer.gettype() != "EOF"){
                 throw std::runtime_error("Error: invalid directive");
             }
-        // std::cout << lexer.gettype() +  " ==> " + lexer.getvalue(0) << std::endl;
     }
 }

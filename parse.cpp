@@ -65,14 +65,22 @@ int main( ){
        config = parse_config("newfile.conf");
        for(int i = 0; i < config.size(); i++)
        {
-           std::cout << "host: " << config.front().host << std::endl;
-           std::cout << "port: " << config.front().port.front() << std::endl;
-           std::cout << "client_max_body_size: " << config.front().body_size_limit << std::endl;
-           std::cout << "index: " << config.front().index.front() << std::endl;
-           std::cout << "error_page: " << config.front().default_error_page["404"] << std::endl;
-           std::cout << "root: " << config.front().root << std::endl;
-           std::cout << "autoindex: " << config.front().autoindex << std::endl;
-           config.pop_front();
+            std::cout<<"===================================================="<<std::endl;
+            std::list<t_location>::iterator it = config.front().locations.begin();
+            while(it != config.front().locations.end())
+            {
+                std::cout << "==========>location_path:" << it->path_location << std::endl;
+                it++;
+            }
+            std::cout<<"===================================================="<<std::endl;
+            // std::cout << "host: " << config.front().host << std::endl;
+            // std::cout << "port: " << config.front().port.front() << std::endl;
+            // std::cout << "client_max_body_size: " << config.front().body_size_limit << std::endl;
+            // std::cout << "index: " << config.front().index.front() << std::endl;
+            // std::cout << "error_page: " << config.front().default_error_page["404"] << std::endl;
+            // std::cout << "root: " << config.front().root << std::endl;
+            // std::cout << "autoindex: " << config.front().autoindex << std::endl;
+            config.pop_front();
        }
     }
     catch(const std::exception& e)
