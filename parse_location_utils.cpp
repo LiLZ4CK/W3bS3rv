@@ -51,9 +51,10 @@ void    parse_location_body_size_limit(Lexer &lexer,t_config &config) {
 }
 
 void    parse_location_root(Lexer &lexer,t_config &config) {
-    if(lexer.get_size_value() != 1)
+    if(lexer.get_size_value() < 1 || lexer.get_size_value() > 3)
         throw std::runtime_error("Error: root take one value");
-    config.locations.back().root = lexer.getvalue(0);
+    for(int i = 0; i < lexer.get_size_value(); i++)
+        config.locations.back().root.push_back(lexer.getvalue(i));
 }
 
 void  parse_location_index(Lexer &lexer,t_config &config) {

@@ -8,7 +8,7 @@ void	init_location(std::list<t_location> &loc)
     location.http_redirect.url = "";
     location.file_upload_location = "";
     location.body_size_limit = 0;
-    location.root = "";
+    location.root.clear();
     location.index.clear();
     location.port.clear();
     location.http_methods.clear();

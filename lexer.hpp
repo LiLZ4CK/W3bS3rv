@@ -46,7 +46,7 @@ typedef struct s_location{
     s_http_redirect http_redirect;
     std::string file_upload_location;
     size_t body_size_limit;
-    std::string root;
+    std::list<std::string> root;
     std::list<std::string> index;
     
 } t_location;
